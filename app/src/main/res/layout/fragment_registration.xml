@@ -108,7 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@id/registration_label_birth_year" />
 
             <ImageView
-                android:id="@+id/registration_image_birth_year_help_background"
+                android:id="@+id/registration_image_birth_year_info_background"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_marginLeft="30dp"
@@ -117,14 +117,14 @@
                 app:layout_constraintStart_toEndOf="@id/registration_spinner_birth_year"
                 app:layout_constraintTop_toTopOf="@id/registration_spinner_birth_year" />
             <ImageView
-                android:id="@+id/registration_image_birth_year_help"
+                android:id="@+id/registration_image_birth_year_info"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:src="@drawable/question_mark"
-                app:layout_constraintStart_toStartOf="@id/registration_image_birth_year_help_background"
-                app:layout_constraintEnd_toEndOf="@id/registration_image_birth_year_help_background"
-                app:layout_constraintTop_toTopOf="@id/registration_image_birth_year_help_background"
-                app:layout_constraintBottom_toBottomOf="@id/registration_image_birth_year_help_background" />
+                app:layout_constraintStart_toStartOf="@id/registration_image_birth_year_info_background"
+                app:layout_constraintEnd_toEndOf="@id/registration_image_birth_year_info_background"
+                app:layout_constraintTop_toTopOf="@id/registration_image_birth_year_info_background"
+                app:layout_constraintBottom_toBottomOf="@id/registration_image_birth_year_info_background" />
 
             <TextView
                 android:id="@+id/registration_label_country"
@@ -241,6 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Privacy and policy"
+                android:textColor="@color/button"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@id/registration_image_terms_and_policy_checkbox_background"
                 app:layout_constraintTop_toTopOf="@id/registration_image_terms_and_policy_checkbox_background" />
@@ -266,29 +267,29 @@
                 app:layout_constraintTop_toBottomOf="@id/registration_image_terms_and_policy_checkbox" />
 
             <ImageView
-                android:id="@+id/registration_image_birth_year_help_window"
+                android:id="@+id/registration_image_birth_year_info_window"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/help_window"
                 android:visibility="gone"
                 android:layout_marginTop="5dp"
-                app:layout_constraintTop_toBottomOf="@id/registration_image_birth_year_help"
-                app:layout_constraintStart_toEndOf="@id/registration_image_birth_year_help_background"
-                app:layout_constraintEnd_toStartOf="@id/registration_image_birth_year_help_background" />
+                app:layout_constraintTop_toBottomOf="@id/registration_image_birth_year_info"
+                app:layout_constraintStart_toEndOf="@id/registration_image_birth_year_info_background"
+                app:layout_constraintEnd_toStartOf="@id/registration_image_birth_year_info_background" />
             <TextView
-                android:id="@+id/registration_image_birth_year_help_text"
+                android:id="@+id/registration_text_birth_year_info"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/birth_year_help"
+                android:text="@string/birth_year_info"
                 android:textSize="13dp"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="25dp"
-                app:layout_constraintStart_toStartOf="@id/registration_image_birth_year_help_window"
-                app:layout_constraintEnd_toEndOf="@id/registration_image_birth_year_help_window"
-                app:layout_constraintTop_toTopOf="@id/registration_image_birth_year_help_window"
-                app:layout_constraintBottom_toBottomOf="@id/registration_image_birth_year_help_window" />
+                app:layout_constraintStart_toStartOf="@id/registration_image_birth_year_info_window"
+                app:layout_constraintEnd_toEndOf="@id/registration_image_birth_year_info_window"
+                app:layout_constraintTop_toTopOf="@id/registration_image_birth_year_info_window"
+                app:layout_constraintBottom_toBottomOf="@id/registration_image_birth_year_info_window" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

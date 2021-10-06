@@ -2,8 +2,6 @@ package com.haris.credspo.ui.registration
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +20,7 @@ class RegistrationFragment: Fragment() {
     private val binding get() = _binding!!
 
     var agreedToTerms = false
-    var openedTermsHelpWindow = false
+    var openedBirthYearInfo = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,16 +33,16 @@ class RegistrationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var birth_year_list = listOf<String>("1", "2", "3");
-        var country_list = listOf<String>("Montenegro", "Russia", "Nigeria", "Japan");
+        var birthYearList = listOf<String>("1", "2", "3");
+        var countryList = listOf<String>("Montenegro", "Russia", "Nigeria", "Japan");
 
-        val birth_year_adapter = ArrayAdapter<String>(requireContext(), R.layout.support_simple_spinner_dropdown_item, birth_year_list)
-        birth_year_adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        val country_adapter = ArrayAdapter<String>(requireContext(), R.layout.support_simple_spinner_dropdown_item, country_list)
-        country_adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        val birthYearAdapter = ArrayAdapter<String>(requireContext(), R.layout.support_simple_spinner_dropdown_item, birthYearList)
+        birthYearAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        val countryAdapter = ArrayAdapter<String>(requireContext(), R.layout.support_simple_spinner_dropdown_item, countryList)
+        countryAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
-        binding.registrationSpinnerBirthYear.adapter = birth_year_adapter
-        binding.registrationSpinnerCountry.adapter = country_adapter
+        binding.registrationSpinnerBirthYear.adapter = birthYearAdapter
+        binding.registrationSpinnerCountry.adapter = countryAdapter
 
         binding.registrationImageTermsAndPolicyCheckboxBackground.setOnClickListener {
             if(!agreedToTerms){
@@ -59,30 +57,31 @@ class RegistrationFragment: Fragment() {
 
         }
 
-        binding.registrationImageBirthYearHelpBackground.setOnClickListener {
-            if(!openedTermsHelpWindow) {
-                binding.registrationImageBirthYearHelp.setTint(R.color.cyan)
-                binding.registrationImageBirthYearHelpBackground.setImageResource(R.drawable.question_mark_background_checked)
+        binding.registrationImageBirthYearInfoBackground.setOnClickListener {
+            if(!openedBirthYearInfo) {
+                binding.registrationImageBirthYearInfo.setTint(R.color.cyan)
+                binding.registrationImageBirthYearInfoBackground.setImageResource(R.drawable.question_mark_background_checked)
 
-                binding.registrationImageBirthYearHelpWindow.visibility = View.VISIBLE
-                binding.registrationImageBirthYearHelpText.visibility = View.VISIBLE
+                binding.registrationImageBirthYearInfoWindow.visibility = View.VISIBLE
+                binding.registrationTextBirthYearInfo.visibility = View.VISIBLE
 
-                openedTermsHelpWindow = true
+                openedBirthYearInfo = true
             } else {
-                binding.registrationImageBirthYearHelp.clearTint()
-                binding.registrationImageBirthYearHelpBackground.setImageResource(R.drawable.question_mark_background_unchecked)
+                binding.registrationImageBirthYearInfo.clearTint()
+                binding.registrationImageBirthYearInfoBackground.setImageResource(R.drawable.question_mark_background_unchecked)
 
-                binding.registrationImageBirthYearHelpWindow.visibility = View.GONE
-                binding.registrationImageBirthYearHelpText.visibility = View.GONE
+                binding.registrationImageBirthYearInfoWindow.visibility = View.GONE
+                binding.registrationTextBirthYearInfo.visibility = View.GONE
 
-                openedTermsHelpWindow = false
+                openedBirthYearInfo = false
             }
         }
     }
-    fun ImageView.setTint(@ColorRes colorRes: Int) {
+
+    private fun ImageView.setTint(@ColorRes colorRes: Int) {
         ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)))
     }
-    fun ImageView.clearTint() {
+    private fun ImageView.clearTint() {
         ImageViewCompat.setImageTintList(this, null)
     }
 }
