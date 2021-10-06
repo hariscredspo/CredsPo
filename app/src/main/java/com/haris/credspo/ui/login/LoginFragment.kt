@@ -26,6 +26,9 @@ class LoginFragment : Fragment() {
         binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_login_fragment_to_profile_fragment)
         }
+        binding.loginLabelCreateAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_login_fragment_to_registration_fragment)
+        }
     }
 
 }

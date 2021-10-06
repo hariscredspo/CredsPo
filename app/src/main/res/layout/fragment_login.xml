@@ -28,8 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        android:textColor="@color/black"
-        android:textSize="12dp"
+        android:textColor="@color/darker_blue"
+        android:textSize="12sp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@id/login_edittext_email"
         app:layout_constraintTop_toBottomOf="@id/login_image_logo" />
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         style="@style/Theme.CredsPo.EditText"
         android:inputType="textEmailAddress"
+        android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@id/login_label_email" />
 
     <TextView
@@ -45,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
-        android:textColor="@color/black"
-        android:textSize="12dp"
+        android:textColor="@color/darker_blue"
+        android:textSize="12sp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@id/login_edittext_email"
         app:layout_constraintTop_toBottomOf="@id/login_edittext_email" />
@@ -55,13 +56,14 @@
         android:layout_width="match_parent"
         style="@style/Theme.CredsPo.EditText"
         android:inputType="textPassword"
+        android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@id/login_label_pass" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         style="@style/Theme.CredsPo.Button"
-        android:text="Log in"
+        android:text="LOG IN"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/login_edittext_pass"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,15 +81,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not registered yet?"
-        android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textColor="@color/darker_blue"
+        android:textSize="15sp" />
     <TextView
         android:id="@+id/login_label_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create an account"
-        android:textColor="@color/cyan"
-        android:textSize="15dp"
+        android:textColor="@color/light_blue"
+        android:textSize="15sp"
         android:layout_marginLeft="5dp"
         app:layout_constraintStart_toEndOf="@id/login_label_not_registered" />
     </LinearLayout>
