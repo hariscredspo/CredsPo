@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_login_fragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_login_fragment_to_registration_fragment"
+            app:destination="@id/registration_fragment" />
     </fragment>
 
     <fragment
@@ -29,5 +32,11 @@
         tools:layout="@layout/fragment_profile" >
     </fragment>
 
+
+    <fragment
+        android:id="@+id/registration_fragment"
+        android:name="com.haris.credspo.ui.registration.RegistrationFragment"
+        tools:layout="@layout/fragment_registration" >
+    </fragment>
 
 </navigation>
