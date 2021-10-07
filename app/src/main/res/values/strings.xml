@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CredsPo</string>
     <string name="birth_year_info">We collect simple demographic information i.e. the age of the user so we can make sure that we are building a product that meets your needs and is age appropriate.</string>
+    <string name="placeholder_name">John Smith</string>
 </resources>
