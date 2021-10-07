@@ -31,15 +31,21 @@
         android:textColor="@color/darker_blue"
         android:textSize="12sp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="@id/login_edittext_email"
+        app:layout_constraintStart_toStartOf="@id/login_input_email"
         app:layout_constraintTop_toBottomOf="@id/login_image_logo" />
-    <EditText
-        android:id="@+id/login_edittext_email"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_input_email"
         android:layout_width="match_parent"
-        style="@style/Theme.CredsPo.EditText"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/login_label_email" />
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintTop_toBottomOf="@id/login_label_email" >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            style="@style/Theme.CredsPo.EditText" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_label_pass"
@@ -49,15 +55,21 @@
         android:textColor="@color/darker_blue"
         android:textSize="12sp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="@id/login_edittext_email"
-        app:layout_constraintTop_toBottomOf="@id/login_edittext_email" />
-    <EditText
-        android:id="@+id/login_edittext_pass"
+        app:layout_constraintStart_toStartOf="@id/login_input_email"
+        app:layout_constraintTop_toBottomOf="@id/login_input_email" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_input_pass"
         android:layout_width="match_parent"
-        style="@style/Theme.CredsPo.EditText"
-        android:inputType="textPassword"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/login_label_pass" />
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintTop_toBottomOf="@id/login_label_pass" >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            style="@style/Theme.CredsPo.EditText" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/login_button"
@@ -65,7 +77,7 @@
         style="@style/Theme.CredsPo.Button"
         android:text="LOG IN"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/login_edittext_pass"
+        app:layout_constraintTop_toBottomOf="@id/login_input_pass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
