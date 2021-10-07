@@ -37,6 +37,18 @@
         android:id="@+id/registration_fragment"
         android:name="com.haris.credspo.ui.registration.RegistrationFragment"
         tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registration_fragment_to_verification_fragment"
+            app:destination="@id/verification_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verification_fragment"
+        android:name="com.haris.credspo.ui.registration.VerificationFragment"
+        tools:layout="@layout/fragment_verification" >
+        <action
+            android:id="@+id/action_verification_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
     </fragment>
 
 </navigation>

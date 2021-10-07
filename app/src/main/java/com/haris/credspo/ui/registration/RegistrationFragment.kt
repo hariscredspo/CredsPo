@@ -17,6 +17,7 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.haris.credspo.ApiInterface
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentRegistrationBinding
@@ -109,6 +110,10 @@ class RegistrationFragment: Fragment() {
 
                 openedBirthYearInfo = false
             }
+        }
+
+        binding.registrationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
         }
     }
 

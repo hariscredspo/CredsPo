@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-xhdpi/rect_rounded_white_outline.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable-xxhdpi/checkbox_background_unchecked.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable-xxhdpi/question_mark_background_checked.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable-xxhdpi/question_mark_background_unchecked.xml" value="0.39010416666666664" />
@@ -12,8 +13,10 @@
         <entry key="app/src/main/res/drawable/floating_button_white.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable/rect_floating_red.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable/rect_rounded_floating_white.xml" value="0.39010416666666664" />
+        <entry key="app/src/main/res/drawable/rect_rounded_light_gray.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable/rect_rounded_red.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/drawable/rect_rounded_white.xml" value="0.39010416666666664" />
+        <entry key="app/src/main/res/layout/acitivity_verification.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.35774647887323946" />
