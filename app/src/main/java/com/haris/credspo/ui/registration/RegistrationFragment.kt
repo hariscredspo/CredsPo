@@ -1,6 +1,7 @@
 package com.haris.credspo.ui.registration
 
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -113,7 +114,8 @@ class RegistrationFragment: Fragment() {
         }
 
         binding.registrationButton.setOnClickListener {
-            findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
+            if(validForm())
+                findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
         }
     }
 
@@ -162,5 +164,57 @@ class RegistrationFragment: Fragment() {
             list.add(n)
 
         return list
+    }
+
+    private fun validForm(): Boolean {
+        with(binding) {
+            if(registrationEdittextFirstName.text.length < 3){
+                registrationInputFirstName.isErrorEnabled = true
+                registrationInputFirstName.error = resources.getString(R.string.requirement_first_name)
+                return false
+            } else {
+                registrationInputFirstName.error = null
+            }
+
+            if(registrationEdittextLastName.text.length < 3){
+                registrationInputLastName.error = resources.getString(R.string.requirement_last_name)
+                return false
+            } else {
+                registrationInputLastName.error = null
+            }
+
+            if(!isValidEmail(registrationEdittextEmail.text.toString())){
+                registrationInputEmail.error = resources.getString(R.string.requirement_email)
+                return false
+            } else {
+                registrationInputEmail.error = null
+            }
+
+            if(registrationEdittextPass.text.length < 8){
+                registrationInputPass.error = resources.getString(R.string.requirement_password)
+                return false
+            } else {
+                registrationInputPass.error = null
+            }
+
+            if(registrationEdittextRepeatPass.text.toString() != registrationEdittextPass.text.toString()){
+                registrationInputRepeatPass.error = resources.getString(R.string.requirement_repeat_password)
+                return false
+            } else {
+                registrationInputRepeatPass.error = null
+            }
+
+            if(!agreedToTerms)
+                return false
+
+        }
+        return true
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        //TODO: proper validation
+        if(email.length < 3)
+            return false
+        return true
     }
 }
