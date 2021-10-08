@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private val args: ProfileFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,6 +29,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            profileLabelName.text = "${args.firstName} ${args.lastName}"
+
             profileButtonLogout.setOnClickListener { logout() }
             profileButtonDelete.setOnClickListener { logout() }
         }
