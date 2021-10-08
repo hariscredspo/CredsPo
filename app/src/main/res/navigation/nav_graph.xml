@@ -30,6 +30,9 @@
         android:id="@+id/profile_fragment"
         android:name="com.haris.credspo.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
     </fragment>
 
 

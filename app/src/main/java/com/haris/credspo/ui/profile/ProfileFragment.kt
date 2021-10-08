@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -21,6 +23,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            profileButtonLogout.setOnClickListener { logout() }
+            profileButtonDelete.setOnClickListener { logout() }
+        }
     }
 
+    private fun logout() {
+        findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
+    }
 }
