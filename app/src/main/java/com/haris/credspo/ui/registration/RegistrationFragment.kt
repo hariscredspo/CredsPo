@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.util.Range
 import android.view.LayoutInflater
 import android.view.View
@@ -178,10 +179,9 @@ class RegistrationFragment: Fragment() {
     }
 
     private fun isValidEmail(email: String): Boolean {
-        //TODO: proper validation
-        if(email.length < 3)
+        if(email.isEmpty())
             return false
-        return true
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun ImageView.setTint(@ColorRes colorRes: Int) {
