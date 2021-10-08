@@ -31,8 +31,8 @@ class RegistrationFragment: Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
 
-    var agreedToTerms = false
-    var openedBirthYearInfo = false
+    private var agreedToTerms = false
+    private var openedBirthYearInfo = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,19 +45,34 @@ class RegistrationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupBirthYearInfoBox()
+        setupBirthYearSpinner()
+        setupCountrySpinner()
+        setupTermsAndConditionsCheckbox()
+
+        binding.registrationButton.setOnClickListener {
+            if(validForm())
+                findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
+        }
+    }
+
+
+    private fun setupBirthYearSpinner() {
         var birthYearList = listOfIntegersInRange(1900..Calendar.getInstance().get(Calendar.YEAR))
 
         val birthYearAdapter = ArrayAdapter<Int>(requireContext(), R.layout.support_simple_spinner_dropdown_item, birthYearList)
         birthYearAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         binding.registrationSpinnerBirthYear.adapter = birthYearAdapter
+    }
 
+    private fun setupCountrySpinner() {
         var countryList = mutableListOf<String>()
 
         val countryAdapter = ArrayAdapter<String>(requireContext(), R.layout.support_simple_spinner_dropdown_item, countryList)
         countryAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
-        val call = ApiInterface.create().getCountries()
-        call.enqueue(object: Callback<CountryResponse> {
+        ApiInterface.create()
+            .getCountries().enqueue(object: Callback<CountryResponse> {
             override fun onResponse(
                 call: Call<CountryResponse>,
                 response: Response<CountryResponse>
@@ -74,12 +89,13 @@ class RegistrationFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<CountryResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "Could not load country list", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Could not load country list", Toast.LENGTH_LONG).show()
             }
 
         })
+    }
 
-
+    private fun setupTermsAndConditionsCheckbox() {
         binding.registrationImageTermsAndPolicyCheckboxBackground.setOnClickListener {
             if(!agreedToTerms){
                 binding.registrationImageTermsAndPolicyCheckbox.setColorFilter(Color.argb(255, 255, 255, 255))
@@ -92,7 +108,9 @@ class RegistrationFragment: Fragment() {
             }
 
         }
+    }
 
+    private fun setupBirthYearInfoBox() {
         binding.registrationImageBirthYearInfoBackground.setOnClickListener {
             if(!openedBirthYearInfo) {
                 binding.registrationImageBirthYearInfo.setTint(R.color.cyan)
@@ -112,58 +130,6 @@ class RegistrationFragment: Fragment() {
                 openedBirthYearInfo = false
             }
         }
-
-        binding.registrationButton.setOnClickListener {
-            if(validForm())
-                findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
-        }
-    }
-
-    private fun ImageView.setTint(@ColorRes colorRes: Int) {
-        ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)))
-    }
-    private fun ImageView.clearTint() {
-        ImageViewCompat.setImageTintList(this, null)
-    }
-
-    private fun getCountries(): List<String> {
-        var countries = mutableListOf<String>()
-
-        val call = ApiInterface.create().getCountries()
-        call.enqueue(object: Callback<CountryResponse> {
-            override fun onResponse(
-                call: Call<CountryResponse>,
-                response: Response<CountryResponse>
-            ) {
-                if(response.isSuccessful){
-                    response.body()?.let {
-                        it.data.forEach { country ->
-                            countries.add(country.name)
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<CountryResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "Could not load country list", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
-        while(true){
-            println("Waiting for response")
-            if(countries.isNotEmpty())
-                break
-        }
-
-        return countries
-    }
-    private fun listOfIntegersInRange(range: IntRange): List<Int> {
-        var list = mutableListOf<Int>()
-        for(n in range)
-            list.add(n)
-
-        return list
     }
 
     private fun validForm(): Boolean {
@@ -217,4 +183,20 @@ class RegistrationFragment: Fragment() {
             return false
         return true
     }
+
+    private fun ImageView.setTint(@ColorRes colorRes: Int) {
+        ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)))
+    }
+    private fun ImageView.clearTint() {
+        ImageViewCompat.setImageTintList(this, null)
+    }
+
+    private fun listOfIntegersInRange(range: IntRange): List<Int> {
+        var list = mutableListOf<Int>()
+        for(n in range)
+            list.add(n)
+
+        return list
+    }
+
 }
