@@ -19,9 +19,11 @@ class LoginViewModel: ViewModel() {
     fun login(email: String, password: String) {
         ApiInterface.create().login(email, password).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                loginStatus.postValue(true)
                 response.body()?.let {
+                    loginStatus.postValue(true)
                     userResponseLiveData.postValue(it)
+                } ?: run {
+                    loginStatus.postValue(false)
                 }
             }
 

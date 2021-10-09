@@ -42,47 +42,21 @@ class LoginFragment : Fragment() {
                 viewModel.login(loginEdittextEmail.text.toString().trim(), loginEdittextPass.text.toString())
             }
 
-
-            /*viewModel.loginStatus.observeForever {
-                it?.let {
-                    loginProgressBar.visibility = View.GONE
-                    if (it) {
-                        Log.e("LOGIN STATUS", "true")
-
-                        viewModel.userResponseLiveData.value?.let { response ->
-                            val validationAction = LoginFragmentDirections
-                                .actionLoginFragmentToProfileFragment(
-                                    response.user.firstName,
-                                    response.user.lastName
-                                )
-                            findNavController().navigate(validationAction)
-                        }
-                    } else {
-                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }*/
+            var loginStatus = false
             viewModel.loginStatus.observeForever {
                 it?.let {
+                    loginStatus = it
                     loginProgressBar.visibility = View.GONE
                 }
             }
-            viewModel.userResponseLiveData.observeForever { userResponseLiveData ->
-                userResponseLiveData?.let { livedata ->
-                    viewModel.loginStatus.observeForever { loginStatus ->
-                        loginStatus?.let { status ->
-                            loginProgressBar.visibility = View.GONE
-                            if(status) {
-                                val validationAction = LoginFragmentDirections
-                                    .actionLoginFragmentToProfileFragment(
-                                        livedata.user.firstName,
-                                        livedata.user.lastName
-                                    )
-                                findNavController().navigate(validationAction)
-                            } else {
-                                Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
-                            }
-                        }
+            viewModel.userResponseLiveData.observeForever {
+                it?.let { livedata ->
+                    if(loginStatus) {
+                        val validationAction = LoginFragmentDirections
+                            .actionLoginFragmentToProfileFragment(livedata.user.firstName, livedata.user.lastName)
+                        findNavController().navigate(validationAction)
+                    } else {
+                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
                     }
                 }
             }
