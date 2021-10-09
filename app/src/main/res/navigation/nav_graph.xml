@@ -7,11 +7,14 @@
 
     <fragment
         android:id="@+id/splash_fragment"
-        android:name="com.haris.credspo.ui.SplashScreenFragment"
+        android:name="com.haris.credspo.ui.splash.SplashScreenFragment"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splash_fragment_to_login_fragment"
             app:destination="@+id/login_fragment" />
+        <action
+            android:id="@+id/action_splash_fragment_to_profile_fragment"
+            app:destination="@+id/profile_fragment" />
     </fragment>
 
     <fragment

@@ -30,7 +30,6 @@ class ProfileFragment : Fragment() {
 
         with(binding) {
             profileLabelName.text = "${args.firstName} ${args.lastName}"
-
             profileButtonLogout.setOnClickListener { logout() }
             profileButtonDelete.setOnClickListener { logout() }
         }

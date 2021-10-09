@@ -1,5 +1,6 @@
 package com.haris.credspo.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentLoginBinding
 import kotlinx.coroutines.delay
@@ -52,6 +54,12 @@ class LoginFragment : Fragment() {
             viewModel.userResponseLiveData.observeForever {
                 it?.let { livedata ->
                     if(loginStatus) {
+                        val sharedPreferences = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                        with(sharedPreferences.edit()){
+                            putString("BEARER_TOKEN", livedata.accessToken)
+                            apply()
+                        }
+
                         val validationAction = LoginFragmentDirections
                             .actionLoginFragmentToProfileFragment(livedata.user.firstName, livedata.user.lastName)
                         findNavController().navigate(validationAction)
