@@ -32,6 +32,7 @@ class ProfileFragment : Fragment() {
             profileLabelName.text = "${args.firstName} ${args.lastName}"
             profileButtonLogout.setOnClickListener { logout() }
             profileButtonDelete.setOnClickListener { logout() }
+            profileButtonActivityHistory.setOnClickListener { findNavController().navigate(R.id.action_profile_fragment_to_activity_history_fragment) }
         }
     }
 
