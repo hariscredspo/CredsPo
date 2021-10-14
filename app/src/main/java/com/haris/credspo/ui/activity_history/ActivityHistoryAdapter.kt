@@ -40,8 +40,9 @@ class ActivityHistoryAdapter(
                                 call: Call<DeleteResponse>,
                                 response: Response<DeleteResponse>
                             ) {
+                                val pos = activityHistoryResponse.data.activities.indexOf(item)
                                 activityHistoryResponse.data.activities.remove(item)
-                                notifyItemRemoved(activityHistoryResponse.data.activities.indexOf(item))
+                                notifyItemRemoved(pos)
                             }
 
                             override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
