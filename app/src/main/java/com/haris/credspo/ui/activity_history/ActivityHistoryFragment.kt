@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.haris.credspo.ApiInterface
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentActivityHistoryBinding
 import com.haris.credspo.models.ActivityHistoryResponse
+import com.haris.credspo.models.DeleteResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,7 +69,7 @@ class ActivityHistoryFragment : Fragment() {
                             response: Response<ActivityHistoryResponse>
                         ) {
                             response.body()?.let { body ->
-                                binding.activityHistoryRecyclerView.adapter = ActivityHistoryAdapter(requireContext(), body)
+                                binding.activityHistoryRecyclerView.adapter = ActivityHistoryAdapter(requireContext(), body, requireActivity().supportFragmentManager)
                             }
                         }
                         override fun onFailure(call: Call<ActivityHistoryResponse>, t: Throwable) {}

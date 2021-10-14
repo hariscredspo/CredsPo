@@ -7,19 +7,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.haris.credspo.ApiInterface
 import com.haris.credspo.R
 import com.haris.credspo.models.ActivityHistoryResponse
 import com.haris.credspo.models.ActivityModel
 import com.haris.credspo.models.DeleteResponse
+import com.haris.credspo.ui.ConfirmationDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ActivityHistoryAdapter(
     private val context: Context,
-    private val activityHistoryResponse: ActivityHistoryResponse
+    private val activityHistoryResponse: ActivityHistoryResponse,
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<ActivityHistoryAdapter.ActivityHistoryViewHolder>() {
 
     inner class ActivityHistoryViewHolder(itemView: View) :  RecyclerView.ViewHolder(itemView) {
@@ -27,7 +30,8 @@ class ActivityHistoryAdapter(
             itemView.findViewById<TextView>(R.id.activity_history_item_date).text = item.date
             itemView.findViewById<TextView>(R.id.activity_history_item_name).text = item.title
 
-            itemView.findViewById<ImageView>(R.id.activity_history_item_delete_background).setOnClickListener {
+            val listener = View.OnClickListener {
+                println("CONFIRMED")
                 val sharedPrefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
                 sharedPrefs.getString("BEARER_TOKEN", null)?.let {
                     ApiInterface.create().deleteActivity("Bearer $it", id = item.id)
@@ -46,6 +50,12 @@ class ActivityHistoryAdapter(
                         })
                 }
             }
+
+            itemView.findViewById<ImageView>(R.id.activity_history_item_delete_background).setOnClickListener {
+                val dialog = ConfirmationDialogFragment(listener, "Do you want to delete ${item.title}?")
+                dialog.show(fragmentManager, "ConfirmationDialogFragment")
+            }
+
         }
     }
 

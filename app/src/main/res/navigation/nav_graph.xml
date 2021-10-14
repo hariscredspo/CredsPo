@@ -72,6 +72,15 @@
         android:id="@+id/activity_history_fragment"
         android:name="com.haris.credspo.ui.activity_history.ActivityHistoryFragment"
         tools:layout="@layout/fragment_activity_history" >
+        <action
+            android:id="@+id/action_activity_history_fragment_to_confirmation_popup_dialog"
+            app:destination="@id/confirmation_popup_dialog" />
     </fragment>
+
+    <dialog
+        android:id="@+id/confirmation_popup_dialog"
+        android:name="com.haris.credspo.ui.ConfirmationDialogFragment"
+        tools:layout="@layout/dialog_confirmation_popup" >
+    </dialog>
 
 </navigation>
