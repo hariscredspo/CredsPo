@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splash_fragment"
-        android:name="com.haris.credspo.ui.splash.SplashScreenFragment"
+        android:name="com.haris.credspo.ui.SplashScreenFragment"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splash_fragment_to_login_fragment"

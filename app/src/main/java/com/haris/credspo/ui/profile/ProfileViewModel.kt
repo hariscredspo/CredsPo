@@ -1,16 +1,14 @@
-package com.haris.credspo.ui.splash
+package com.haris.credspo.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.haris.credspo.ApiInterface
 import com.haris.credspo.models.UserData
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SplashScreenViewModel: ViewModel() {
+class ProfileViewModel: ViewModel() {
     val profileResponseData = MutableLiveData<UserData?>(null)
 
     fun getProfile(token: String) {
