@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentSplashBinding
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -29,6 +30,8 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
+            delay(1500)
+
             val sharedPrefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
             val token = sharedPrefs.getString("BEARER_TOKEN", null)
 

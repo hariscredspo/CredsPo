@@ -2,6 +2,7 @@ package com.haris.credspo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -24,6 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             println("${R.id.activity_history_fragment} \t ${destination.id}")
+            when(destination.id) {
+                R.id.splash_fragment,
+                R.id.login_fragment,
+                R.id.registration_fragment,
+                R.id.verification_fragment -> bottomNav.visibility = View.GONE
+
+                else -> bottomNav.visibility = View.VISIBLE
+            }
         }
     }
 }
