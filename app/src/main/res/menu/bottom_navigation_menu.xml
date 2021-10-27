@@ -8,4 +8,8 @@
         android:id="@id/activity_history_fragment"
         android:icon="@drawable/activity_history_icon"
         android:title="Activity history" />
+    <item
+        android:id="@id/progress_fragment"
+        android:icon="@drawable/progress_icon"
+        android:title="Progress" />
 </menu>

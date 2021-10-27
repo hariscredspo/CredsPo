@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/progress_item_badge_icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:src="@drawable/skills_icon"
+        android:alpha="0.5"
+        app:layout_constraintDimensionRatio="3:3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/progress_item_star_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/star_icon"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/progress_item_badge_icon"
+        app:layout_constraintRight_toRightOf="@id/progress_item_badge_icon" />
+
+    <TextView
+        android:id="@+id/progress_item_badge_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@id/progress_item_star_icon"
+        app:layout_constraintRight_toRightOf="@id/progress_item_star_icon"
+        app:layout_constraintTop_toTopOf="@id/progress_item_star_icon"
+        app:layout_constraintBottom_toBottomOf="@id/progress_item_star_icon" />
+
+    <TextView
+        android:id="@+id/progress_item_badge_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darker_blue"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@id/progress_item_badge_icon"
+        app:layout_constraintRight_toRightOf="@id/progress_item_badge_icon"
+        app:layout_constraintTop_toBottomOf="@id/progress_item_badge_icon" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

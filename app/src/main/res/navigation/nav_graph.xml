@@ -44,9 +44,6 @@
         <action
             android:id="@+id/action_profile_fragment_to_login_fragment"
             app:destination="@id/login_fragment" />
-        <action
-            android:id="@+id/action_profile_fragment_to_activity_history_fragment"
-            app:destination="@id/activity_history_fragment" />
     </fragment>
 
 
@@ -75,6 +72,12 @@
         <action
             android:id="@+id/action_activity_history_fragment_to_confirmation_popup_dialog"
             app:destination="@id/confirmation_popup_dialog" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/progress_fragment"
+        tools:layout="@layout/fragment_progress"
+        android:name="com.haris.credspo.ui.progress.ProgressFragment" >
     </fragment>
 
     <dialog

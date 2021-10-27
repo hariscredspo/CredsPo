@@ -5,6 +5,10 @@ data class ActivityHistoryResponse(
     val data: ActivityHistoryResponseData
 )
 data class ActivityHistoryResponseData(
-    val badges: List<BadgeModel>,
+    val badges: List<ActivityHistoryResponseBadgeData>,
     val activities: MutableList<ActivityModel>
+)
+data class ActivityHistoryResponseBadgeData(
+    val id: Int,
+    val name: String
 )

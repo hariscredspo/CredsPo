@@ -28,7 +28,6 @@ class ActivityHistoryFragment : Fragment() {
     private lateinit var viewModel: ActivityHistoryViewModel
 
     private var tabsList = mutableListOf<TextView>()
-    private var currentTab: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -43,6 +43,21 @@ interface ApiInterface {
         @Query("badge_id") badgeID: Int = 0,
     ): Call<ActivityHistoryResponse>
 
+    @GET("/api/user-skills")
+    fun getUserSkills(
+        @Header("Authorization") token: String,
+    ): Call<UserBadgesResponse>
+
+    @GET("/api/user-attributes")
+    fun getUserAttributes(
+        @Header("Authorization") token: String,
+    ): Call<UserBadgesResponse>
+
+    @GET("/api/user-waypoints")
+    fun getUserWaypoints(
+        @Header("Authorization") token: String,
+    ): Call<UserBadgesResponse>
+
     @POST("/api/auth/login")
     fun login(
         @Query("email") email: String,
