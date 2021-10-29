@@ -12,5 +12,7 @@ data class UserData(
     @SerializedName("first_name")
     val firstName: String,
     @SerializedName("last_name")
-    val lastName: String
+    val lastName: String,
+    @SerializedName("image_path")
+    val imagePath: String
 )

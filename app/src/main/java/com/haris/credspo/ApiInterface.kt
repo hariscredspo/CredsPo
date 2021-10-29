@@ -1,9 +1,11 @@
 package com.haris.credspo
 
 import com.haris.credspo.models.*
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -63,6 +65,13 @@ interface ApiInterface {
         @Query("email") email: String,
         @Query("password") password: String,
     ): Call<LoginResponse>
+
+    @Multipart
+    @POST("/api/image-update")
+    suspend fun updateProfileImage(
+        @Header("Authorization") token: String,
+        @Part img: MultipartBody.Part
+    ): Response<MessageResponse>
 
     @DELETE("/api/delete-activity")
     fun deleteActivity(
