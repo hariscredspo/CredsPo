@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
         app:labelVisibilityMode="selected"
-        app:itemIconTint="@color/button"
-        app:itemTextColor="@color/button"
-        app:itemIconSize="28dp"
+        app:itemTextColor="@color/bottom_navigation"
+        app:itemIconTint="@color/bottom_navigation"
+        app:itemIconSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
