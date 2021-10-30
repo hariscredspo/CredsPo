@@ -60,9 +60,7 @@ class LoginFragment : Fragment() {
                             apply()
                         }
 
-                        val validationAction = LoginFragmentDirections
-                            .actionLoginFragmentToProfileFragment(livedata.user.firstName, livedata.user.lastName)
-                        findNavController().navigate(validationAction)
+                        findNavController().navigate(R.id.action_login_fragment_to_profile_fragment)
                     } else {
                         Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
                     }

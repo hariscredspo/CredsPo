@@ -26,14 +26,10 @@ import android.content.Intent
 
 import androidx.core.app.ActivityCompat.startActivityForResult
 
-
-
-
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val args: ProfileFragmentArgs by navArgs()
     private lateinit var viewModel: ProfileViewModel
 
     private var token: String? = null

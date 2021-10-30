@@ -66,6 +66,24 @@ interface ApiInterface {
         @Query("password") password: String,
     ): Call<LoginResponse>
 
+    @POST("/api/auth/register")
+    suspend fun register(
+        @Query("first_name") firstName: String,
+        @Query("last_name") lastName: String,
+        @Query("email") email: String,
+        @Query("password") password: String,
+        @Query("password_confirmation") passwordConfirm: String,
+        @Query("country_id") countryId: String,
+        @Query("birth_year") birth_year: String,
+    ): Response<RegistrationResponse>
+
+    @POST("/api/auth/verify")
+    fun verify(
+        @Query("email") email: String,
+        @Query("password") password: String,
+        @Query("verification_code") verificationCode: String,
+    ): Call<LoginResponse>
+
     @Multipart
     @POST("/api/image-update")
     suspend fun updateProfileImage(

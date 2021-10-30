@@ -1,20 +1,14 @@
 package com.haris.credspo.ui.registration
 
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.util.Range
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.ListAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
@@ -27,6 +21,12 @@ import com.haris.credspo.models.CountryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+
 
 class RegistrationFragment: Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
@@ -34,6 +34,7 @@ class RegistrationFragment: Fragment() {
 
     private var agreedToTerms = false
     private var openedBirthYearInfo = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,8 +53,27 @@ class RegistrationFragment: Fragment() {
         setupTermsAndConditionsCheckbox()
 
         binding.registrationButton.setOnClickListener {
-            if(validForm())
-                findNavController().navigate(R.id.action_registration_fragment_to_verification_fragment)
+            if(validForm()) {
+
+                with(binding) {
+                    lifecycleScope.launch {
+                        println(registrationSpinnerCountry.selectedItemId.toString())
+                        ApiInterface.create().register(
+                            registrationEdittextFirstName.text.toString(),
+                            registrationEdittextLastName.text.toString(),
+                            registrationEdittextEmail.text.toString(),
+                            registrationEdittextPass.text.toString(),
+                            registrationEdittextRepeatPass.text.toString(),
+                            (registrationSpinnerCountry.selectedItemId+1).toString(),
+                            registrationSpinnerBirthYear.selectedItem.toString()
+                        )
+                    }
+                    findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment(
+                        registrationEdittextEmail.text.toString(),
+                        registrationEdittextPass.text.toString(),
+                    ))
+                }
+            }
         }
     }
 
