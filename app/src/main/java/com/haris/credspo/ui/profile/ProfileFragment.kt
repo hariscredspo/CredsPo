@@ -23,8 +23,12 @@ import com.haris.credspo.ui.ConfirmationDialogFragment
 import okhttp3.MultipartBody
 import java.io.File
 import android.content.Intent
+import android.widget.Toast
 
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.lifecycle.lifecycleScope
+import com.haris.credspo.ApiInterface
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -92,7 +96,18 @@ class ProfileFragment : Fragment() {
 
         with(binding) {
             profileButtonLogout.setOnClickListener { logout() }
-            profileButtonDelete.setOnClickListener { logout() }
+            profileButtonDelete.setOnClickListener {
+                token?.let { it1 ->
+                    lifecycleScope.launch {
+                        val response = ApiInterface.create().deleteUser("Bearer $it1")
+                        if(response.isSuccessful) {
+                            logout()
+                        } else {
+                            Toast.makeText(requireContext(), "Could not delete account", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
         }
     }
 

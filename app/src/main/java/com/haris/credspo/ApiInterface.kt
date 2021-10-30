@@ -96,4 +96,9 @@ interface ApiInterface {
         @Header("Authorization") token: String,
         @Query("id") id: Int = 0,
     ): Call<DeleteResponse>
+
+    @DELETE("/api/user")
+    suspend fun deleteUser(
+        @Header("Authorization") token: String,
+    ): Response<DeleteResponse>
 }
