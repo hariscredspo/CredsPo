@@ -12,7 +12,11 @@ import com.haris.credspo.R
 
 class ConfirmationDialogFragment(
     private val confirmClickListener: View.OnClickListener,
-    private val confirmationMsg: String,
+    private val cancelClickListener: View.OnClickListener,
+    private val titleText: String,
+    private val confirmationMsgText: String,
+    private val confirmButtonText: String,
+    private val cancelButtonText: String,
 ) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +35,16 @@ class ConfirmationDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.confirmation_popup_label_message).text = confirmationMsg
+        view.findViewById<TextView>(R.id.confirmation_popup_label_message).text = confirmationMsgText
+        view.findViewById<TextView>(R.id.confirmation_popup_label_title).text = titleText
+        view.findViewById<TextView>(R.id.confirmation_popup_button_yes).text = confirmButtonText
+        view.findViewById<TextView>(R.id.confirmation_popup_button_no).text = cancelButtonText
         view.findViewById<Button>(R.id.confirmation_popup_button_yes).setOnClickListener {
             confirmClickListener.onClick(view)
             dismiss()
         }
         view.findViewById<Button>(R.id.confirmation_popup_button_no).setOnClickListener {
+            cancelClickListener.onClick(view)
             dismiss()
         }
     }

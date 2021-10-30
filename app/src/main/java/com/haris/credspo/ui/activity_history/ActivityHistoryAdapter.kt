@@ -53,7 +53,7 @@ class ActivityHistoryAdapter(
             }
 
             itemView.findViewById<ImageView>(R.id.activity_history_item_delete_background).setOnClickListener {
-                val dialog = ConfirmationDialogFragment(listener, "Do you want to delete ${item.title}?")
+                val dialog = ConfirmationDialogFragment(listener, View.OnClickListener{}, "Delete activity?",  "Do you want to delete ${item.title}?", "YES", "NO")
                 dialog.show(fragmentManager, "ConfirmationDialogFragment")
             }
 

@@ -19,8 +19,15 @@ import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentProfileBinding
 import com.haris.credspo.models.ContentUriRequestBody
 import com.haris.credspo.models.UserData
+import com.haris.credspo.ui.ConfirmationDialogFragment
 import okhttp3.MultipartBody
 import java.io.File
+import android.content.Intent
+
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+
+
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -45,7 +52,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.profileImagePfp.setOnClickListener{ takeImage() }
+        binding.profileImagePfp.setOnClickListener{
+            val dialog = ConfirmationDialogFragment(
+                { takePhoto() },
+                { choosePhoto() },
+                "Upload photo",  "Do you want to choose a photo or take a new one?", "TAKE PHOTO", "CHOOSE PHOTO")
+            dialog.show(parentFragmentManager, "ConfirmationDialogFragment")
+        }
 
         val sharedPrefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val userData = sharedPrefs.getString("USER_DATA", null)
@@ -95,9 +108,12 @@ class ProfileFragment : Fragment() {
             .apply()
     }
 
-    private fun takeImage() {
+    private fun takePhoto() {
         newPhotoUri = getTemporaryFileUri()
         takeImageResult.launch(newPhotoUri)
+    }
+    private fun choosePhoto() {
+        choosePhotoResult.launch("image/*")
     }
 
     private fun getTemporaryFileUri(): Uri {
@@ -119,11 +135,20 @@ class ProfileFragment : Fragment() {
                     token?.let {
                         val imageBody = ContentUriRequestBody(requireContext().contentResolver, uri)
                         val imagePart = MultipartBody.Part.createFormData("image_path","${System.currentTimeMillis()}.png", imageBody)
-                        println("updating pfp")
                         viewModel.updatePfp(it, imagePart)
                     }
                     binding.profileImagePfp.setImageURI(uri)
                 }
             }
+        }
+
+    private val choosePhotoResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            token?.let {
+                val imageBody = ContentUriRequestBody(requireContext().contentResolver, uri)
+                val imagePart = MultipartBody.Part.createFormData("image_path","${System.currentTimeMillis()}.png", imageBody)
+                viewModel.updatePfp(it, imagePart)
+            }
+            binding.profileImagePfp.setImageURI(uri)
         }
 }
