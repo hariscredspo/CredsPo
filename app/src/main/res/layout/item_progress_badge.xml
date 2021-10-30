@@ -23,7 +23,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/star_icon"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/progress_item_badge_icon"
         app:layout_constraintRight_toRightOf="@id/progress_item_badge_icon" />
 
@@ -34,7 +33,6 @@
         android:text="0"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="@id/progress_item_star_icon"
         app:layout_constraintRight_toRightOf="@id/progress_item_star_icon"
         app:layout_constraintTop_toTopOf="@id/progress_item_star_icon"

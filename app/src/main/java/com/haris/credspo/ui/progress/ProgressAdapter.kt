@@ -42,7 +42,14 @@ class ProgressAdapter(
                 count.text = "${item.count}"
                 count.visibility = View.VISIBLE
                 icon.alpha = 1f
+
+                val matrix = ColorMatrix()
+                icon.colorFilter = ColorMatrixColorFilter(matrix)
             } else {
+                star.visibility = View.INVISIBLE
+                count.visibility = View.INVISIBLE
+                icon.alpha = 0.5f
+
                 val matrix = ColorMatrix()
                 matrix.setSaturation(0f)
                 icon.colorFilter = ColorMatrixColorFilter(matrix)
