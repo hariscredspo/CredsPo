@@ -79,7 +79,7 @@ class RegistrationFragment: Fragment() {
 
 
     private fun setupBirthYearSpinner() {
-        var birthYearList = listOfIntegersInRange(1900..Calendar.getInstance().get(Calendar.YEAR))
+        var birthYearList = listOfIntegersInRange(1901..Calendar.getInstance().get(Calendar.YEAR))
 
         val birthYearAdapter = ArrayAdapter<Int>(requireContext(), R.layout.support_simple_spinner_dropdown_item, birthYearList)
         birthYearAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
