@@ -67,9 +67,11 @@ class ProfileFragment : Fragment() {
         userData?.let { json ->
             val convertedJson = GsonBuilder().create().fromJson(json, UserData::class.java)
 
-            Glide.with(this)
+            Glide.with(requireContext())
                 .load(convertedJson.imagePath)
+                .placeholder(R.drawable.placeholder_pfp)
                 .centerCrop()
+                .dontAnimate()
                 .into(binding.profileImagePfp)
 
             binding.profileLabelName.text = "${convertedJson.firstName} ${convertedJson.lastName}"

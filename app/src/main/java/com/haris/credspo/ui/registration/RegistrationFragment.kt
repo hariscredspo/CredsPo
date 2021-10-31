@@ -26,6 +26,8 @@ import android.widget.AdapterView.OnItemClickListener
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RegistrationFragment: Fragment() {
@@ -82,7 +84,10 @@ class RegistrationFragment: Fragment() {
 
 
     private fun setupBirthYearSpinner() {
-        var birthYearList = listOfIntegersInRange(1901..Calendar.getInstance().get(Calendar.YEAR))
+        val sdf = SimpleDateFormat("yyyy", Locale.getDefault())
+        val currentYear: Int = sdf.format(Date()).toInt()
+
+        var birthYearList = listOfIntegersInRange(1910..currentYear)
 
         val birthYearAdapter = ArrayAdapter<Int>(requireContext(), R.layout.support_simple_spinner_dropdown_item, birthYearList)
         birthYearAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
