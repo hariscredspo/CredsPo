@@ -31,6 +31,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="30dp"
                 android:text="Create an account"
+                android:textStyle="bold"
                 android:textColor="@color/dark_blue"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -271,8 +272,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Privacy and policy"
+                android:textStyle="bold"
                 android:textColor="@color/button"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/registration_image_terms_and_policy_checkbox_background"
                 app:layout_constraintTop_toTopOf="@id/registration_image_terms_and_policy_checkbox_background" />
 
@@ -292,6 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="30dp"
                 android:text="CREATE ACCOUNT"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/registration_image_terms_and_policy_checkbox" />
