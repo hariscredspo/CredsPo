@@ -68,11 +68,14 @@ class RegistrationFragment: Fragment() {
                             registrationSpinnerBirthYear.selectedItem.toString()
                         )
                     }
-                    findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment(
-                        registrationEdittextEmail.text.toString(),
-                        registrationEdittextPass.text.toString(),
-                    ))
-                }
+                    if(findNavController().currentDestination?.id == R.id.registration_fragment) {
+                        findNavController().navigate(
+                            RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment(
+                                registrationEdittextEmail.text.toString(),
+                                registrationEdittextPass.text.toString(),
+                            )
+                        )
+                    }}
             }
         }
     }

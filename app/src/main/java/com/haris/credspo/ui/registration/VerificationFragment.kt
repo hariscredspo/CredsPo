@@ -83,7 +83,9 @@ class VerificationFragment : Fragment() {
                             apply()
                         }
 
-                        findNavController().navigate(R.id.action_verification_fragment_to_profile_fragment)
+                        if(findNavController().currentDestination?.id == R.id.verification_fragment) {
+                            findNavController().navigate(R.id.action_verification_fragment_to_profile_fragment)
+                        }
                     } else {
                         Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
                     }

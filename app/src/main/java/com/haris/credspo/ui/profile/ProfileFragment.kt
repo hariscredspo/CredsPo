@@ -112,7 +112,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logout() {
-        findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
+        if(findNavController().currentDestination?.id == R.id.profile_fragment) {
+            findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
+        }
         requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
             .putString("BEARER_TOKEN", null)
             .putString("USER_DATA", null)

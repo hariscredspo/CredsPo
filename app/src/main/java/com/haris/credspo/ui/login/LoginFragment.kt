@@ -37,7 +37,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             loginLabelCreateAccount.setOnClickListener {
-                findNavController().navigate(R.id.action_login_fragment_to_registration_fragment)
+                if(findNavController().currentDestination?.id == R.id.login_fragment) {
+                    findNavController().navigate(R.id.action_login_fragment_to_registration_fragment)
+                }
             }
             loginButton.setOnClickListener {
                 loginProgressBar.visibility = View.VISIBLE
@@ -60,7 +62,9 @@ class LoginFragment : Fragment() {
                             apply()
                         }
 
-                        findNavController().navigate(R.id.action_login_fragment_to_profile_fragment)
+                        if(findNavController().currentDestination?.id == R.id.login_fragment) {
+                            findNavController().navigate(R.id.action_login_fragment_to_profile_fragment)
+                        }
                     } else {
                         Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
                     }
