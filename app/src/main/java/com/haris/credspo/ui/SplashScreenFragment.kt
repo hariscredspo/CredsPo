@@ -36,13 +36,9 @@ class SplashScreenFragment : Fragment() {
             val token = sharedPrefs.getString("BEARER_TOKEN", null)
 
             token?.let {
-                if(findNavController().currentDestination?.id == R.id.splash_fragment) {
-                    findNavController().navigate(R.id.action_splash_fragment_to_profile_fragment)
-                }
+                findNavController().navigate(R.id.action_splash_fragment_to_profile_fragment)
             } ?: run {
-                if(findNavController().currentDestination?.id == R.id.splash_fragment) {
-                    findNavController().navigate(R.id.action_splash_fragment_to_login_fragment)
-                }
+                findNavController().navigate(R.id.action_splash_fragment_to_login_fragment)
             }
         }
     }

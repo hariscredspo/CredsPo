@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            println("${R.id.activity_history_fragment} \t ${destination.id}")
             when(destination.id) {
                 R.id.splash_fragment,
                 R.id.login_fragment,

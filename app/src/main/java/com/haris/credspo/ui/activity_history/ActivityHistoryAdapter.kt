@@ -14,7 +14,7 @@ import com.haris.credspo.R
 import com.haris.credspo.models.ActivityHistoryResponse
 import com.haris.credspo.models.ActivityModel
 import com.haris.credspo.models.DeleteResponse
-import com.haris.credspo.ui.ConfirmationDialogFragment
+import com.haris.credspo.ui.TwoButtonDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +53,7 @@ class ActivityHistoryAdapter(
             }
 
             itemView.findViewById<ImageView>(R.id.activity_history_item_delete_background).setOnClickListener {
-                val dialog = ConfirmationDialogFragment(listener, View.OnClickListener{}, "Delete activity?",  "Do you want to delete ${item.title}?", "YES", "NO")
+                val dialog = TwoButtonDialogFragment(listener, View.OnClickListener{}, "Delete activity?",  "Do you want to delete ${item.title}?", "YES", "NO")
                 dialog.show(fragmentManager, "ConfirmationDialogFragment")
             }
 

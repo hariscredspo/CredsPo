@@ -51,6 +51,9 @@ class LoginFragment : Fragment() {
                 it?.let {
                     loginStatus = it
                     loginProgressBar.visibility = View.GONE
+                    if(!it) {
+                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
             viewModel.userResponseLiveData.observeForever {
@@ -65,8 +68,6 @@ class LoginFragment : Fragment() {
                         if(findNavController().currentDestination?.id == R.id.login_fragment) {
                             findNavController().navigate(R.id.action_login_fragment_to_profile_fragment)
                         }
-                    } else {
-                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_LONG).show()
                     }
                 }
             }

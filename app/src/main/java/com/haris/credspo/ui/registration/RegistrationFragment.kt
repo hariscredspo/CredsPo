@@ -24,6 +24,7 @@ import retrofit2.Response
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import androidx.lifecycle.lifecycleScope
+import com.haris.credspo.models.RegistrationResponse
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -59,7 +60,6 @@ class RegistrationFragment: Fragment() {
 
                 with(binding) {
                     lifecycleScope.launch {
-                        println(registrationSpinnerCountry.selectedItemId.toString())
                         ApiInterface.create().register(
                             registrationEdittextFirstName.text.toString(),
                             registrationEdittextLastName.text.toString(),
@@ -68,16 +68,28 @@ class RegistrationFragment: Fragment() {
                             registrationEdittextRepeatPass.text.toString(),
                             (registrationSpinnerCountry.selectedItemId+1).toString(),
                             registrationSpinnerBirthYear.selectedItem.toString()
-                        )
+                        ).enqueue(object: Callback<RegistrationResponse> {
+                            override fun onResponse(
+                                call: Call<RegistrationResponse>,
+                                response: Response<RegistrationResponse>
+                            ) {
+                                if(findNavController().currentDestination?.id == R.id.registration_fragment) {
+                                    findNavController().navigate(
+                                        RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment(
+                                            registrationEdittextEmail.text.toString(),
+                                            registrationEdittextPass.text.toString(),
+                                        )
+                                    )
+                                }
+                            }
+
+                            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                                Toast.makeText(requireContext(), "Could not register user", Toast.LENGTH_SHORT).show()
+                            }
+
+                        })
                     }
-                    if(findNavController().currentDestination?.id == R.id.registration_fragment) {
-                        findNavController().navigate(
-                            RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment(
-                                registrationEdittextEmail.text.toString(),
-                                registrationEdittextPass.text.toString(),
-                            )
-                        )
-                    }}
+                }
             }
         }
     }

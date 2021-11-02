@@ -67,7 +67,7 @@ interface ApiInterface {
     ): Call<LoginResponse>
 
     @POST("/api/auth/register")
-    suspend fun register(
+    fun register(
         @Query("first_name") firstName: String,
         @Query("last_name") lastName: String,
         @Query("email") email: String,
@@ -75,7 +75,7 @@ interface ApiInterface {
         @Query("password_confirmation") passwordConfirm: String,
         @Query("country_id") countryId: String,
         @Query("birth_year") birth_year: String,
-    ): Response<RegistrationResponse>
+    ): Call<RegistrationResponse>
 
     @POST("/api/auth/verify")
     fun verify(
@@ -86,10 +86,10 @@ interface ApiInterface {
 
     @Multipart
     @POST("/api/image-update")
-    suspend fun updateProfileImage(
+    fun updateProfileImage(
         @Header("Authorization") token: String,
         @Part img: MultipartBody.Part
-    ): Response<MessageResponse>
+    ): Call<MessageResponse>
 
     @DELETE("/api/delete-activity")
     fun deleteActivity(
@@ -98,7 +98,7 @@ interface ApiInterface {
     ): Call<DeleteResponse>
 
     @DELETE("/api/user")
-    suspend fun deleteUser(
+    fun deleteUser(
         @Header("Authorization") token: String,
-    ): Response<DeleteResponse>
+    ): Call<DeleteResponse>
 }

@@ -6,29 +6,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.gson.GsonBuilder
+import com.haris.credspo.ApiInterface
 import com.haris.credspo.BuildConfig
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentProfileBinding
 import com.haris.credspo.models.ContentUriRequestBody
 import com.haris.credspo.models.UserData
-import com.haris.credspo.ui.ConfirmationDialogFragment
+import com.haris.credspo.ui.TwoButtonDialogFragment
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import java.io.File
-import android.content.Intent
-import android.widget.Toast
+import com.haris.credspo.models.DeleteResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.lifecycle.lifecycleScope
-import com.haris.credspo.ApiInterface
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -53,11 +54,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.profileImagePfp.setOnClickListener{
-            val dialog = ConfirmationDialogFragment(
+            val dialog = TwoButtonDialogFragment(
                 { takePhoto() },
                 { choosePhoto() },
                 "Upload photo",  "Do you want to choose a photo or take a new one?", "TAKE PHOTO", "CHOOSE PHOTO")
-            dialog.show(parentFragmentManager, "ConfirmationDialogFragment")
+            dialog.show(parentFragmentManager, "photoUploadMethodDialog")
         }
 
         val sharedPrefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
@@ -81,6 +82,16 @@ class ProfileFragment : Fragment() {
             }
         }
 
+
+        with(binding) {
+            profileButtonLogout.setOnClickListener { logout() }
+            profileButtonDelete.setOnClickListener {
+                token?.let {
+                    viewModel.deleteProfile(it)
+                }
+            }
+        }
+
         viewModel.profileResponseData.observeForever { data ->
             data?.let {
                 Glide.with(this)
@@ -90,37 +101,35 @@ class ProfileFragment : Fragment() {
 
                 val convertedData = GsonBuilder().create().toJson(it)
                 sharedPrefs.edit().putString("USER_DATA", convertedData).apply()
-                println("shared preferences updated")
                 binding.profileLabelName.text = "${it.firstName} ${it.lastName}"
             }
         }
 
+        viewModel.pfpUpdateStatus.observeForever { status ->
+            if(status == false) {
+                Toast.makeText(requireContext(), "Could not update profile picture", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-        with(binding) {
-            profileButtonLogout.setOnClickListener { logout() }
-            profileButtonDelete.setOnClickListener {
-                token?.let { it1 ->
-                    lifecycleScope.launch {
-                        val response = ApiInterface.create().deleteUser("Bearer $it1")
-                        if(response.isSuccessful) {
-                            logout()
-                        } else {
-                            Toast.makeText(requireContext(), "Could not delete account", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
+        viewModel.deleteProfileStatus.observeForever { status ->
+            if(status == true) {
+                Toast.makeText(requireContext(), "Successfully deleted account", Toast.LENGTH_SHORT).show()
+                logout()
+            } else if(status == false) {
+                Toast.makeText(requireContext(), "Could not delete account", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun logout() {
-        if(findNavController().currentDestination?.id == R.id.profile_fragment) {
-            findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
-        }
         requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
             .putString("BEARER_TOKEN", null)
             .putString("USER_DATA", null)
             .apply()
+        Toast.makeText(requireContext(), "Successfully logged out", Toast.LENGTH_SHORT).show()
+        if(findNavController().currentDestination?.id == R.id.profile_fragment) {
+            findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
+        }
     }
 
     private fun takePhoto() {
@@ -160,10 +169,14 @@ class ProfileFragment : Fragment() {
     private val choosePhotoResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             token?.let {
-                val imageBody = ContentUriRequestBody(requireContext().contentResolver, uri)
-                val imagePart = MultipartBody.Part.createFormData("image_path","${System.currentTimeMillis()}.png", imageBody)
-                viewModel.updatePfp(it, imagePart)
+                if(uri == null) {
+                    Toast.makeText(requireContext(), "Please choose a photo", Toast.LENGTH_SHORT).show()
+                } else {
+                    val imageBody = ContentUriRequestBody(requireContext().contentResolver, uri)
+                    val imagePart = MultipartBody.Part.createFormData("image_path","${System.currentTimeMillis()}.png", imageBody)
+                    viewModel.updatePfp(it, imagePart)
+                    binding.profileImagePfp.setImageURI(uri)
+                }
             }
-            binding.profileImagePfp.setImageURI(uri)
         }
 }

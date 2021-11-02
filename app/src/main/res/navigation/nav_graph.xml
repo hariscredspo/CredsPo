@@ -82,8 +82,8 @@
 
     <dialog
         android:id="@+id/confirmation_popup_dialog"
-        android:name="com.haris.credspo.ui.ConfirmationDialogFragment"
-        tools:layout="@layout/dialog_confirmation_popup" >
+        android:name="com.haris.credspo.ui.TwoButtonDialogFragment"
+        tools:layout="@layout/dialog_two_button_popup" >
     </dialog>
 
 </navigation>
