@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/splash_logo"
+        android:transitionName="splash_fragment_logo"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:src="@drawable/logo"
@@ -16,6 +17,7 @@
 
     <ImageView
         android:id="@+id/splash_name"
+        android:transitionName="splash_fragment_name"
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:src="@drawable/name"

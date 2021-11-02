@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.haris.credspo.R
 import com.haris.credspo.databinding.FragmentSplashBinding
 import kotlinx.coroutines.delay
@@ -38,7 +41,11 @@ class SplashScreenFragment : Fragment() {
             token?.let {
                 findNavController().navigate(R.id.action_splash_fragment_to_profile_fragment)
             } ?: run {
-                findNavController().navigate(R.id.action_splash_fragment_to_login_fragment)
+                val direction = SplashScreenFragmentDirections.actionSplashFragmentToLoginFragment()
+                val extras = FragmentNavigatorExtras(
+                    binding.splashLogo to "login_fragment_logo",
+                    binding.splashName to "login_fragment_name")
+                findNavController().navigate(direction, extras)
             }
         }
     }

@@ -6,18 +6,22 @@
 
     <ImageView
         android:id="@+id/login_image_logo"
+        android:transitionName="login_fragment_logo"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:src="@drawable/logo"
+        android:translationZ="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/login_label_email" />
     <ImageView
         android:id="@+id/login_image_name"
+        android:transitionName="login_fragment_name"
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:src="@drawable/name"
+        android:translationZ="100dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
