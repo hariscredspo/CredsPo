@@ -114,6 +114,8 @@ class ProfileFragment : Fragment() {
         viewModel.pfpUpdateStatus.observeForever { status ->
             if(status == false) {
                 Toast.makeText(requireContext(), "Could not update profile picture", Toast.LENGTH_SHORT).show()
+            } else if(status == true) {
+                Toast.makeText(requireContext(), "Successfully updated profile picture", Toast.LENGTH_SHORT).show()
             }
         }
 

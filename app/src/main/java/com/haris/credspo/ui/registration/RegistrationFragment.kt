@@ -92,6 +92,8 @@ class RegistrationFragment: Fragment() {
                 }
             }
         }
+
+        binding.registrationImageBack.setOnClickListener { requireActivity().onBackPressed() }
     }
 
 
