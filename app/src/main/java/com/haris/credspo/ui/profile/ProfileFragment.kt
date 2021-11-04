@@ -134,7 +134,11 @@ class ProfileFragment : Fragment() {
             .putString("BEARER_TOKEN", null)
             .putString("USER_DATA", null)
             .apply()
-        Toast.makeText(requireContext(), "Successfully logged out", Toast.LENGTH_SHORT).show()
+
+        if(viewModel.deleteProfileStatus.value != true) {
+            Toast.makeText(requireContext(), "Successfully logged out", Toast.LENGTH_SHORT).show()
+        }
+
         if(findNavController().currentDestination?.id == R.id.profile_fragment) {
             findNavController().navigate(R.id.action_profile_fragment_to_login_fragment)
         }
