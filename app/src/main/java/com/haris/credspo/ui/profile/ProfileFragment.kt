@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import java.io.File
 import com.haris.credspo.models.DeleteResponse
+import com.haris.credspo.models.MessageResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -130,6 +131,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logout() {
+        token?.let {
+            ApiInterface.create().logout("Bearer $it").enqueue(object: Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>,
+                    response: Response<MessageResponse>
+                ) {}
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {}
+            })
+        }
+
         requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
             .putString("BEARER_TOKEN", null)
             .putString("USER_DATA", null)

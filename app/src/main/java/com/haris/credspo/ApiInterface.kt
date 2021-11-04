@@ -84,6 +84,11 @@ interface ApiInterface {
         @Query("verification_code") verificationCode: String,
     ): Call<LoginResponse>
 
+    @POST("/api/auth/logout")
+    fun logout(
+        @Header("Authorization") token: String,
+    ): Call<MessageResponse>
+
     @Multipart
     @POST("/api/image-update")
     fun updateProfileImage(
