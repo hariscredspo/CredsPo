@@ -35,6 +35,7 @@ class SplashScreenFragment : Fragment() {
         lifecycleScope.launch {
             delay(1500)
 
+            // navigate to the profile screen if the API token is already stored, otherwise navigate to the login screen
             val sharedPrefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
             val token = sharedPrefs.getString("BEARER_TOKEN", null)
 

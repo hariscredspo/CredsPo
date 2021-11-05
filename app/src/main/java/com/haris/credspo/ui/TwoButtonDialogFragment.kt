@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.haris.credspo.R
 
+// helper class for displaying a dialog with 2 buttons
 class TwoButtonDialogFragment(
     private val buttonOneListener: View.OnClickListener,
     private val buttonTwoListener: View.OnClickListener,
@@ -24,6 +25,7 @@ class TwoButtonDialogFragment(
     ): View? {
         val view = inflater.inflate(R.layout.dialog_two_button_popup, container, false)
 
+        // setting these options is necessary for rounded corners
         dialog?.window?.let {
             it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             it.requestFeature(Window.FEATURE_NO_TITLE)
@@ -34,10 +36,12 @@ class TwoButtonDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         view.findViewById<TextView>(R.id.confirmation_popup_label_message).text = descriptionText
         view.findViewById<TextView>(R.id.confirmation_popup_label_title).text = titleText
         view.findViewById<TextView>(R.id.confirmation_popup_button_yes).text = buttonOneText
         view.findViewById<TextView>(R.id.confirmation_popup_button_no).text = buttonTwoText
+
         view.findViewById<Button>(R.id.confirmation_popup_button_yes).setOnClickListener {
             buttonOneListener.onClick(view)
             dismiss()

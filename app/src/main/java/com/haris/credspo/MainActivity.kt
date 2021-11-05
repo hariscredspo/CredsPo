@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setupWithNavController(navController)
 
 
+        // make bottom nav bar invisible on certain screens
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.splash_fragment,

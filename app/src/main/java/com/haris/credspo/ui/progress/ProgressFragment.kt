@@ -50,8 +50,8 @@ class ProgressFragment: Fragment() {
 
         binding.progressRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3, LinearLayoutManager.VERTICAL, false)
 
+        // when switching between tabs
         viewModel.currentTab.observeForever { type ->
-            println("SWITCHED TAB")
             val sharedPrefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
             val token = sharedPrefs.getString("BEARER_TOKEN", null)
 
@@ -72,7 +72,6 @@ class ProgressFragment: Fragment() {
                     }
 
                     override fun onFailure(call: Call<UserBadgesResponse>, t: Throwable) {}
-
                 })
             }
         }

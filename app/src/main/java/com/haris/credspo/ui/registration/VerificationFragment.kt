@@ -43,6 +43,7 @@ class VerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // disable back button
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {}
         })
@@ -56,6 +57,7 @@ class VerificationFragment : Fragment() {
             linkInputFields(verificationEdittext2, verificationEdittext3)
             linkInputFields(verificationEdittext3, verificationEdittext4)
 
+            // after the last character has been inputted
             verificationEdittext4.doAfterTextChanged {
                 with(args) {
                     ApiInterface.create().verify(

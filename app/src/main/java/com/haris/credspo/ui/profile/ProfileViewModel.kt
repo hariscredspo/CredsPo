@@ -32,7 +32,6 @@ class ProfileViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<UserData>, t: Throwable) {}
-
         })
     }
 
